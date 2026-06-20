@@ -4,13 +4,18 @@
 
 **a. Initial design**
 
-- Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+My initial UML has four classes with clear, one-directional relationships: an Owner has many Pets, each Pet has many Tasks, and a Scheduler reads from the Owner to act on all of its tasks. I deliberately separated data from behavior — Owner, Pet, and Task just hold information, while the Scheduler holds the logic.
+
+Classes and responsibilities:
+
+Task — one care activity. Stores its description, start time, duration, priority, frequency, completion status, and due date; can mark itself complete.
+Pet — a single animal. Stores its name, species, and its own list of tasks; can add and return those tasks.
+Owner — the user. Stores their name, available daily time, and list of pets; can add pets and aggregate every task across all of them.
+Scheduler — the system's "brain." Holds no data of its own; it reads from the Owner and is responsible for sorting tasks, generating the daily plan within the time budget, detecting conflicts, and managing recurring tasks.
 
 **b. Design changes**
 
-- Did your design change during implementation?
-- If yes, describe at least one change and why you made it.
+Yes. While designing, I refined the Task model after re-reading the scenario. I originally treated duration and priority as optional, but the scheduler's core job is fitting tasks into a limited time budget and ordering them by importance — without those two fields it has nothing to reason about — so I made both required. I also added a due_date field early, before implementing recurring tasks, so I won't have to restructure the data model later when a daily task needs to roll over to the next day.
 
 ---
 
