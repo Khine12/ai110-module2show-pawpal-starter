@@ -23,13 +23,11 @@ Yes. While designing, I refined the Task model after re-reading the scenario. I 
 
 **a. Constraints and priorities**
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
+My scheduler considers two constraints: the owner's available time (a daily minute budget) and each task's priority. The planner sorts incomplete tasks by priority first (high → medium → low), then by time, and adds each only if it fits the remaining budget. I treated priority as most important because pet care has non-negotiable tasks like medication and feeding that should never be dropped for optional ones like extra play time, so the planner schedules high-priority tasks first. Time is the hard limit — once the budget is exhausted, remaining tasks are skipped with an explanation.
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+My planner is greedy: it walks tasks in priority order and takes each if it fits, without reconsidering earlier picks. The tradeoff is that a high-priority task that doesn't fit can be passed over while a smaller, lower-priority task that does fit gets scheduled instead — a smarter algorithm might rearrange to fit the important one. A second tradeoff is in conflict detection: I flag any overlap of two tasks' time windows as a warning rather than auto-resolving it. Both are reasonable here because this is a personal pet-care helper, not a hospital scheduler — predictable, readable behavior and letting the human make the final call matter more than a mathematically optimal plan.
 
 ---
 
