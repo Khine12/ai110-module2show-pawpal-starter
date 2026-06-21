@@ -55,18 +55,30 @@ Today's Schedule for Khine:
 
 ## 🧪 Testing PawPal+
 
-```bash
-# Run the full test suite:
-pytest
+Run the suite from the repo root:
 
-# Run with coverage:
-pytest --cov
-```
+    python -m pytest
 
-Sample test output:
+The tests cover core object behavior (task completion, adding tasks) and the
+scheduling logic: chronological sorting, daily-task recurrence, conflict
+detection (overlap and non-overlap), an empty-pet edge case, and the planner
+respecting the time budget.
 
-```
-# Paste your pytest output here
+**Confidence Level:** ⭐⭐⭐⭐ (4/5) — the tested behaviors are solid; with more
+time I'd add tests for weekly recurrence across month boundaries and conflicts
+between different pets.
+
+(.venv) PS C:\Users\khine\ai110-module2show-pawpal-starter> python -m pytest
+===================== test session starts ======================
+platform win32 -- Python 3.12.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\khine\ai110-module2show-pawpal-starter
+plugins: anyio-4.14.0
+collected 8 items                                               
+
+tests\test_pawpal.py ........                             [100%]
+
+====================== 8 passed in 0.12s =======================
+
 ```
 
 ## 📐 Smarter Scheduling
