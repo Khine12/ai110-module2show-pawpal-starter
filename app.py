@@ -77,11 +77,30 @@ st.divider()
 
 # --- Generate Schedule ---
 st.subheader("Today's Schedule")
+budget = st.number_input("Time available today (minutes)",
+                         min_value=10, max_value=1440,
+                         value=owner.available_minutes)
+owner.available_minutes = int(budget)
+
 if st.button("Generate schedule"):
     if not owner.get_all_tasks():
         st.warning("No tasks yet — add some above first.")
     else:
         scheduler = Scheduler(owner)
-        st.success("Here's your schedule, sorted by time:")
-        for t in scheduler.sort_tasks():
-            st.write(f"**{t.time}** — {t.description} ({t.duration} min) · priority: {t.priority}")
+
+        # Conflicts shown as warnings the owner can act on
+        for w in scheduler.detect_conflicts():
+            st.warning(w)
+
+        # The priority-fit plan
+        planned, skipped = scheduler.generate_plan()
+        if planned:
+            st.success("Planned for today:")
+            st.table([
+                {"Time": t.time, "Task": t.description,
+                 "Duration (min)": t.duration, "Priority": t.priority}
+                for t in sorted(planned, key=lambda t: t.time)
+            ])
+        # What didn't fit, and why
+        for t, reason in skipped:
+            st.caption(f"Skipped '{t.description}' — {reason}")

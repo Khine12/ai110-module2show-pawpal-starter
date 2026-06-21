@@ -35,13 +35,11 @@ My planner is greedy: it walks tasks in priority order and takes each if it fits
 
 **a. How you used AI**
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+I used AI across the whole build: brainstorming the class design and UML, scaffolding then implementing the methods, drafting the demo script and test suite, and wiring the logic into Streamlit. The most useful prompts were narrow ones tied to a specific method or error — like how the Scheduler should pull tasks from the Owner's pets, or how to use timedelta for the recurring due date — rather than "build the whole app" asks.
 
 **b. Judgment and verification**
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+One suggestion I modified: a more "Pythonic" conflict-detection using itertools.combinations. It was shorter, but the explicit double loop is easier to read and explain, so I kept the readable version. I verified the logic by running main.py with deliberately overlapping tasks and by writing tests asserting exactly one conflict for overlapping times and zero for non-overlapping ones.
 
 ---
 
@@ -49,13 +47,11 @@ My planner is greedy: it walks tasks in priority order and takes each if it fits
 
 **a. What you tested**
 
-- What behaviors did you test?
-- Why were these tests important?
+I tested task completion and adding tasks, plus the scheduling logic: sorting, recurrence, and conflict detection, with edge cases for an empty pet and a task that exceeds the time budget. 
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+Confidence: 4/5 — solid on the tested paths; next I'd test weekly recurrence over month boundaries and cross-pet conflicts.
 
 ---
 
@@ -63,12 +59,12 @@ My planner is greedy: it walks tasks in priority order and takes each if it fits
 
 **a. What went well**
 
-- What part of this project are you most satisfied with?
+Went well: the CLI-first workflow — building and verifying the logic in main.py before the UI meant the brain already worked when I reached Streamlit, so I only had to handle st.session_state.  
 
 **b. What you would improve**
 
-- If you had another iteration, what would you improve or redesign?
+Improve: make the planner smarter than greedy so a high-priority task isn't passed over for a smaller low-priority one, and persist data between runs.
 
 **c. Key takeaway**
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+Key takeaway: staying the lead architect matters even when AI writes code fast — the real decisions (separating data from behavior, putting recurrence on the Scheduler, keeping readable code over clever code) were mine, and AI was most useful when I drove the design and asked narrow questions.

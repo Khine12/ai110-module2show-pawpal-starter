@@ -52,7 +52,6 @@ Today's Schedule for Khine:
 [ ] 18:00  Play time       (20 min) [low]           
 
 ```
-
 ## 🧪 Testing PawPal+
 
 Run the suite from the repo root:
@@ -93,13 +92,9 @@ tests\test_pawpal.py ........                             [100%]
 | Recurring tasks | Scheduler.mark_task_complete() → _create_next_occurrence() | Daily/weekly tasks spawn the next occurrence (+1 / +7 days via timedelta) | Daily plan | Scheduler.generate_plan(available_minutes) | Greedy, priority-first selection within the time budget; returns planned + skipped-with-reasons
 
 ## 📸 Demo Walkthrough
-
-Describe your app in numbered steps so a reader can follow along without watching a video:
-
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
-
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
+1. Enter the owner's name and add one or more pets with the **Add Pet** button.
+2. Pick a pet, fill in a task (title, time, duration, priority), and click **Add task**.
+3. Repeat to add a few tasks at different times.
+4. Set the time available for the day, then click **Generate schedule**.
+5. The app flags any time conflicts, shows the priority-fit plan in a table, and
+   notes any tasks it skipped because the budget ran out.
