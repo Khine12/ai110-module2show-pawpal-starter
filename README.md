@@ -46,10 +46,10 @@ pip install -r requirements.txt
 
 Today's Schedule for Khine:
 ----------------------------------------
-[ ] 07:30  Litter change   (10 min) [medium]
-[ ] 08:00  Morning walk    (30 min) [high]
-[ ] 09:00  Feeding         (10 min) [high]
-[ ] 18:00  Play time       (20 min) [low]
+[ ] 07:30  Litter change   (10 min) [medium]          
+[ ] 08:00  Morning walk    (30 min) [high]                  
+[ ] 09:00  Feeding         (10 min) [high]             
+[ ] 18:00  Play time       (20 min) [low]           
 
 ```
 
