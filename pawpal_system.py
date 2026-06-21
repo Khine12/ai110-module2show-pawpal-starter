@@ -21,23 +21,23 @@ class Task:
 
     def mark_complete(self):
         """Mark this task as completed."""
-        pass
+        self.completed = True
 
 
 @dataclass
 class Pet:
-    """A pet owned by an Owner, holding its own list of tasks."""
+    """A pet that holds its own list of care tasks."""
     name: str
     species: str
     tasks: list = field(default_factory=list)
 
     def add_task(self, task):
         """Add a task to this pet's task list."""
-        pass
+        self.tasks.append(task)
 
     def get_tasks(self):
-        """Return all tasks for this pet."""
-        pass
+        """Return this pet's list of tasks."""
+        return self.tasks
 
 
 class Owner:
@@ -50,31 +50,36 @@ class Owner:
 
     def add_pet(self, pet):
         """Add a pet to this owner."""
-        pass
+        self.pets.append(pet)
 
     def get_all_tasks(self):
         """Return every task across all of this owner's pets."""
-        pass
+        all_tasks = []
+        for pet in self.pets:
+            all_tasks.extend(pet.get_tasks())
+        return all_tasks
 
 
 class Scheduler:
-    """The 'brain': sorts tasks, builds the daily plan, detects conflicts."""
+    """The 'brain': retrieves and organizes tasks across all pets."""
 
     def __init__(self, owner):
         self.owner = owner
 
     def sort_tasks(self):
-        """Return tasks sorted by priority, then time."""
-        pass
+        """Return all of the owner's tasks sorted by start time."""
+        tasks = self.owner.get_all_tasks()
+        return sorted(tasks, key=lambda t: t.time)
 
+    # --- Implemented in Phase 4 (algorithmic layer) ---
     def generate_plan(self, available_minutes):
-        """Build a daily plan within the time budget; return plan + skipped reasons."""
+        """Build a daily plan within the time budget (Phase 4)."""
         pass
 
     def detect_conflicts(self):
-        """Find tasks whose time slots overlap."""
+        """Find tasks whose time slots overlap (Phase 4)."""
         pass
 
     def mark_task_complete(self, task):
-        """Mark a task complete and spawn the next occurrence if recurring."""
+        """Mark a task complete and handle recurrence (Phase 4)."""
         pass
